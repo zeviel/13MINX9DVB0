@@ -15,8 +15,6 @@ print("▀░▀ ▀░░░▀ ▀ ▀░░▀ ░▀░ ▀░▀ ▀▀░ 
 print("Advertise Bot Amino")
 communities = {}
 lz = []
-lz2 = []
-lz3 = []
 from concurrent.futures import ThreadPoolExecutor
 import concurrent.futures
 import amino
