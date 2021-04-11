@@ -46,9 +46,11 @@ for i in lz:
      
 		
 print("Sending Advertise")
-with concurrent.futures.ThreadPoolExecutor(max_workers=40000) as executor:
-	for _ in range(50000):
+for _ in range(4000):
+	with concurrent.futures.ThreadPoolExecutor(max_workers=40000) as executor:
 		_ = [executor.submit(sub_client.start_chat, user, msg) for userId in user]
-		
 
-		
+print("Sending Advertise 2")
+for _ in range(4000):
+	with concurrent.futures.ThreadPoolExecutor(max_workers=40000) as executor:
+		_ = [executor.submit(sub_client.start_chat, user, msg) for userId in user]
