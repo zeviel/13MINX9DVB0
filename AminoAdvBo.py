@@ -13,7 +13,6 @@ print("▄▀▄ █▄░▄█ ▀ █▄░█ ▄▀▄ ▄▀▄ █▀▄ 
 print("█▀█ █░█░█ █ █░▀█ █░█ █▀█ █░█ ░▀▄▀░ █▀█ █░█")
 print("▀░▀ ▀░░░▀ ▀ ▀░░▀ ░▀░ ▀░▀ ▀▀░ ░░▀░░ ▀▀░ ░▀░")
 print("Advertise Bot Amino")
-communities = {}
 lz = []
 from concurrent.futures import ThreadPoolExecutor
 import concurrent.futures
@@ -29,14 +28,10 @@ password = input("Password/Пароль:")
 msg = input("Message/Сообщение:")
 client = amino.Client()
 client.login(email=email, password=password)
-clients = client.sub_clients(size=100)
-x = 0
-for name, id in zip(clients.name, clients.comId):
-    print(f"{x + 1}.{name}")
-    communities[x] = str(id)
-    x+=1
-
-communityid = communities[int(input("Выберите сообщество/Select the community: "))-1]
+clients = client.sub_clients(start=0, size=1000)
+for x, name in enumerate(clients.name, 1):
+    print(f"{x}.{name}")
+communityid = clients.comId[int(input("Выберите сообщество/Select the community: "))-1]
 sub_client = amino.SubClient(comId=communityid, profile=client.profile)
 users = sub_client.get_online_users(size=1000)
 user = advertise(users)
