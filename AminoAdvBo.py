@@ -15,7 +15,6 @@ Telegram: @NowNameBo
 ▀░▀ ▀░░░▀ ▀ ▀░░▀ ░▀░ ▀░▀ ▀▀░ ░░▀░░ ▀▀░ ░▀░""")
 print("Advertise Bot Amino")
 lz = []
-from concurrent.futures import ThreadPoolExecutor
 import concurrent.futures
 import amino
 def advertise(data):
@@ -43,10 +42,6 @@ for i in lz:
         
 print("Sending Advertise")
 for _ in range(4000):
-    with concurrent.futures.ThreadPoolExecutor(max_workers=40000) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4000) as executor:
         _ = [executor.submit(sub_client.start_chat, user, msg) for userId in user]
 
-print("Sending Advertise 2")
-for _ in range(4000):
-    with concurrent.futures.ThreadPoolExecutor(max_workers=40000) as executor:
-        _ = [executor.submit(sub_client.start_chat, user, msg) for userId in user]
