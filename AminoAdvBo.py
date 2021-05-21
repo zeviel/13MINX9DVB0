@@ -1,3 +1,5 @@
+import concurrent.futures
+import amino
 from colorama import init, Fore, Back, Style
 init()
 print(Back.BLACK)
@@ -15,8 +17,6 @@ Telegram: @NowNameBo
 ▀░▀ ▀░░░▀ ▀ ▀░░▀ ░▀░ ▀░▀ ▀▀░ ░░▀░░ ▀▀░ ░▀░""")
 print("Advertise Bot Amino")
 lz = []
-import concurrent.futures
-import amino
 def advertise(data):
     listusers = []
     for userId in data.profile.userId:
