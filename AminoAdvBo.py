@@ -1,14 +1,12 @@
-import concurrent.futures
 import amino
 import pyfiglet
-from colorama import init, Fore, Back, Style
-init()
-print(Fore.RED)
-print(Style.NORMAL)
+import concurrent.futures
+from colored import fore, back, style, attr
+attr(0)
+print(fore.DARK_ORANGE + style.BOLD)
 print("""Script by Lil Zevi
 Github : https://github.com/LilZevi""")
-print(pyfiglet.figlet_format("aminoadvbo", font="cricket"))
-print("Advertise Bot Amino")
+print(pyfiglet.figlet_format("aminoadvbo", font="chunky"))
 lz = []
 def advertise(data):
     listusers = []
@@ -17,23 +15,33 @@ def advertise(data):
     return listusers
 
 client = amino.Client()    
-email = input("Email/Почта: ")
-password = input("Password/Пароль: ")
-msg = input("Message/Сообщение: ")
+email = input("Email >> ")
+password = input("Password >> ")
+msg = input("Message >> ")
 client.login(email=email, password=password)
 clients = client.sub_clients(start=0, size=1000)
 for x, name in enumerate(clients.name, 1):
     print(f"{x}.{name}")
-communityid = clients.comId[int(input("Выберите сообщество/Select the community: "))-1]
+communityid = clients.comId[int(input("Select the community >> "))-1]
 sub_client = amino.SubClient(comId=communityid, profile=client.profile)
-users = sub_client.get_online_users(size=1000)
-user = advertise(users)
-for i in lz:
-        if i in user:
-            user.remove(i)
+
      
         
 print("Sending Advertise")
 while True:
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1000) as executor:
-        _ = [executor.submit(sub_client.start_chat, user, msg) for userId in user]
+	try:
+		users = sub_client.get_online_users(size=1000)
+		theusers = advertise(users)
+		for i in lz:
+			if i in theusers:
+				theusers.remove(i)
+		sub_client.start_chat(userId=theusers, message=msg)
+		with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
+			_ = [executor.submit(sub_client.start_chat, theusers, msg) for userId in theusers]
+	except amino.lib.util.exceptions.VerificationRequired as e:
+		print(f"VerificationRequired")
+		link = e.args[0]['url']
+		print(link)
+		verify = input("Waiting for verification >> ")
+	except Exception as e:
+		print(e)
