@@ -5,7 +5,7 @@ Advertise Bot For AminoApps/Пиар бот для Амино!
 - apt update -y
 - apt upgrade -y
 - pkg install python
-- pip install colorama
+- pip install colored
 - pip install amino.py
 - git clone https://github.com/LilZevi/AminoAdvBo
 - !Для запуска/For starting!
