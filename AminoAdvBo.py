@@ -5,7 +5,7 @@ attr(0)
 print(fore.DARK_ORANGE + style.BOLD)
 print("""Script by deluvsushi
 Github : https://github.com/deluvsushi""")
-print(pyfiglet.figlet_format("aminofixadvbo", font="chunky"))
+print(pyfiglet.figlet_format("aminoadvbo", font="chunky"))
 default_list = [ ]
 def advertise(data: str):
     users_list = [ ]
