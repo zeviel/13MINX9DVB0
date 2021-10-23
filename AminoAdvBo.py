@@ -13,9 +13,9 @@ def advertise(data: str):
         users_list.append(user_Id)
     return users_list
 
-client = aminofix.Client()    
-message = input("Message >> ")
+client = aminofix.Client()
 client.login(email=input("Email >> "), password=input("Password >> "))
+message = input("Message >> ")
 clients = client.sub_clients(start=0, size=1000)
 for x, name in enumerate(clients.name, 1):
     print(f"{x}.{name}")
