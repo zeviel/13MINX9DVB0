@@ -31,8 +31,8 @@ while True:
 		print("-- Sending advertise...")
 		online_users = advertise(sub_client.get_online_users(size=100))
 		for user_id in old:
-			if user_id in old:
-				old.remove(user_id)
+			if user_id in online_users:
+				online_users.remove(user_id)
 		sub_client.start_chat(userId=online_users, message=message)
 		with ThreadPoolExecutor(max_workers=100) as executor:
 			_ = [executor.submit(sub_client.start_chat, online_users, message) for user_id in users]
