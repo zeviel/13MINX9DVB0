@@ -9,7 +9,7 @@ Script by deluvsushi
 Github : https://github.com/deluvsushi"""
 )
 print(figlet_format("aminoadvbo", font="chunky"))
-old = []
+
 def advertise(data: str):
     users_list = []
     for user_id in data.profile.userId:
@@ -30,12 +30,9 @@ while True:
 	try:
 		print("-- Sending advertise...")
 		online_users = advertise(sub_client.get_online_users(size=100))
-		for user_id in old:
-			if user_id in online_users:
-				online_users.remove(user_id)
 		sub_client.start_chat(userId=online_users, message=message)
 		with ThreadPoolExecutor(max_workers=100) as executor:
-			_ = [executor.submit(sub_client.start_chat, online_users, message) for user_id in users]
+			_ = [executor.submit(sub_client.start_chat, online_users, message) for user_id in online_users]
 	except amino.lib.util.exceptions.VerificationRequired as e:
 		print(f"-- VerificationRequired::: {e.args[0]['url']}")
 		verification = input("-- Press enter after verification!")
