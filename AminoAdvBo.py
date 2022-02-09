@@ -1,40 +1,45 @@
 import amino
-from pyfiglet import figlet_format
-from colored import fore, style, attr
 from concurrent.futures import ThreadPoolExecutor
-attr(0)
-print(
-    f"""{fore.DARK_ORANGE + style.BOLD}
+print(f"""\u001b[38;5;124m 
 Script by deluvsushi
-Github : https://github.com/deluvsushi"""
-)
-print(figlet_format("aminoadvbo", font="chunky"))
+Github : https://github.com/deluvsushi
+╭━━━┳━╮╭━┳━━┳━╮╱╭┳━━━┳━━━┳━━━┳╮╱╱╭┳━━╮╭━━━╮
+┃╭━╮┃┃╰╯┃┣┫┣┫┃╰╮┃┃╭━╮┃╭━╮┣╮╭╮┃╰╮╭╯┃╭╮┃┃╭━╮┃
+┃┃╱┃┃╭╮╭╮┃┃┃┃╭╮╰╯┃┃╱┃┃┃╱┃┃┃┃┃┣╮┃┃╭┫╰╯╰┫┃╱┃┃
+┃╰━╯┃┃┃┃┃┃┃┃┃┃╰╮┃┃┃╱┃┃╰━╯┃┃┃┃┃┃╰╯┃┃╭━╮┃┃╱┃┃
+┃╭━╮┃┃┃┃┃┣┫┣┫┃╱┃┃┃╰━╯┃╭━╮┣╯╰╯┃╰╮╭╯┃╰━╯┃╰━╯┃
+╰╯╱╰┻╯╰╯╰┻━━┻╯╱╰━┻━━━┻╯╱╰┻━━━╯╱╰╯╱╰━━━┻━━━╯
+""")
+client = amino.Client()
 
 def advertise(data: str):
     users_list = []
     for user_id in data.profile.userId:
-        users_list.append(user_Id)
+        users_list.append(user_id)
     return users_list
 
-client = amino.Client()
-email = input("-- Email::: ")
-password = input("-- Password::: ")
-client.login(email=email, password=password)
-clients = client.sub_clients(start=0, size=100)
-for x, name in enumerate(clients.name, 1):
-    print(f"{x}.{name}")
-com_id = clients.comId[int(input("-- Select the community::: ")) - 1]
-sub_client = amino.SubClient(comId=com_id, profile=client.profile)
-message = input("-- Message::: ")    
-while True:
-	try:
-		print("-- Sending advertise...")
-		online_users = advertise(sub_client.get_online_users(size=100))
-		sub_client.start_chat(userId=online_users, message=message)
-		with ThreadPoolExecutor(max_workers=100) as executor:
-			_ = [executor.submit(sub_client.start_chat, online_users, message) for user_id in online_users]
-	except amino.lib.util.exceptions.VerificationRequired as e:
-		print(f"-- VerificationRequired::: {e.args[0]['url']}")
-		verification = input("-- Press enter after verification!")
-	except Exception as e:
-		print(e)
+def main_process():
+	email = input("-- Email::: ")
+	password = input("-- Password::: ")
+	client.login(email=email, password=password)
+	clients = client.sub_clients(start=0, size=100)
+	for x, name in enumerate(clients.name, 1):
+ 	   print(f"{x}.{name}")
+	com_id = clients.comId[int(input("-- Select the community::: ")) - 1]
+	sub_client = amino.SubClient(comId=com_id, profile=client.profile)
+	message = input("-- Message::: ")    
+	while True:
+		for i in range(0, 2000, 15000):
+			try:
+				print("-- Sending advertise...")
+				online_users = advertise(sub_client.get_online_users(start=i, size=100))
+				sub_client.start_chat(userId=online_users, message=message)
+				with ThreadPoolExecutor(max_workers=100) as executor:
+					[executor.submit(sub_client.start_chat, online_users, message) for user_id in online_users]
+			except amino.lib.util.exceptions.VerificationRequired as e:
+				print(f"-- VerificationRequired::: {e.args[0]['url']}")
+				verification = input("-- Press enter after verification!")
+			except Exception as e:
+				print(e)
+
+main_process()
