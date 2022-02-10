@@ -19,7 +19,7 @@ def main_process():
     client.login(email=email, password=password)
     clients = client.sub_clients(start=0, size=100)
     for x, name in enumerate(clients.name, 1):
-        print(f"{x}.{name}")
+        print(f"-- {x}:{name}")
     com_id = clients.comId[int(input("-- Select the community::: ")) - 1]
     sub_client = amino.SubClient(comId=com_id, profile=client.profile)
     message = input("-- Message::: ")
