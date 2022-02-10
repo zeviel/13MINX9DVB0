@@ -27,11 +27,8 @@ def main_process():
         for i in range(0, 2000, 15000):
             try:
                 print("-- Sending advertise...")
-                online_users = [
-                    *
-                    sub_client.get_online_users(
-                        start=i,
-                        size=100).profile.userId]
+                online_users = sub_client.get_online_users(start=i, size=100).profile.userId
+                sub_client.start_chat(userId=online_users, message=message)
                 with ThreadPoolExecutor(max_workers=100) as executor:
                     executor.submit(sub_client.start_chat,
                                     online_users, message)
