@@ -1,6 +1,6 @@
 import amino
 from concurrent.futures import ThreadPoolExecutor
-print("""\u001b[38;5;124m
+print(f"""\u001b[38;5;124m
 Script by deluvsushi
 Github : https://github.com/deluvsushi
 ╭━━━┳━╮╭━┳━━┳━╮╱╭┳━━━┳━━━┳━━━┳╮╱╱╭┳━━╮╭━━━╮
@@ -33,8 +33,8 @@ def main_process():
                         start=i,
                         size=100).profile.userId]
                 with ThreadPoolExecutor(max_workers=100) as executor:
-                    [executor.submit(sub_client.start_chat,
-                                     online_users, message)]
+                    executor.submit(sub_client.start_chat,
+                                    online_users, message)
             except amino.lib.util.exceptions.VerificationRequired as e:
                 print(f"-- VerificationRequired::: {e.args[0]['url']}")
                 verification = input("-- Press enter after verification!")
