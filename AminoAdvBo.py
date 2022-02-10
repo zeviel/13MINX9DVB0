@@ -12,12 +12,6 @@ Github : https://github.com/deluvsushi
 """)
 client = amino.Client()
 
-def advertise(data: str):
-    users_list = []
-    for user_id in data.profile.userId:
-        users_list.append(user_id)
-    return users_list
-
 def main_process():
 	email = input("-- Email::: ")
 	password = input("-- Password::: ")
@@ -32,10 +26,9 @@ def main_process():
 		for i in range(0, 2000, 15000):
 			try:
 				print("-- Sending advertise...")
-				online_users = advertise(sub_client.get_online_users(start=i, size=100))
-				sub_client.start_chat(userId=online_users, message=message)
+				online_users = [*sub_client.get_online_users(start=i, size=100).profile.userId]
 				with ThreadPoolExecutor(max_workers=100) as executor:
-					[executor.submit(sub_client.start_chat, online_users, message) for user_id in online_users]
+					[executor.submit(sub_client.start_chat, online_users, message)]
 			except amino.lib.util.exceptions.VerificationRequired as e:
 				print(f"-- VerificationRequired::: {e.args[0]['url']}")
 				verification = input("-- Press enter after verification!")
