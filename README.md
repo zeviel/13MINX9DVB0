@@ -1,4 +1,4 @@
-# AminoAdvBo
+# 13MINX9DVB0
 Advertise bot for amino
 
 ## Termux
@@ -7,7 +7,7 @@ Advertise bot for amino
 - apt upgrade -y
 - pkg install python
 - pip install amino
-- git clone https://github.com/deluvsushi/AminoAdvBo
-- cd AminoAdvBo
-- python AminoAdvBo.py
+- git clone https://github.com/deluvsushi/13MINX9DVB0
+- cd 13MINX9DVB0
+- python 13MINX9DVB0.py
 ```
