@@ -1,8 +1,8 @@
 import amino
 from concurrent.futures import ThreadPoolExecutor
 print(f"""\u001b[38;5;124m
-Script by deluvsushi
-Github : https://github.com/deluvsushi
+Script by zeviel
+Github : https://github.com/zeviel
 ╱╭╮╭━━━┳━╮╭━┳━━┳━╮╱╭┳━╮╭━┳━━━┳━━━┳╮╱╱╭┳━━╮╭━━━╮
 ╭╯┃┃╭━╮┃┃╰╯┃┣┫┣┫┃╰╮┃┣╮╰╯╭┫╭━╮┣╮╭╮┃╰╮╭╯┃╭╮┃┃╭━╮┃
 ╰╮┃╰╯╭╯┃╭╮╭╮┃┃┃┃╭╮╰╯┃╰╮╭╯┃╰━╯┃┃┃┃┣╮┃┃╭┫╰╯╰┫┃┃┃┃
