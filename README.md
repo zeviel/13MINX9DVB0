@@ -7,7 +7,7 @@ Advertise bot for amino
 - apt upgrade -y
 - pkg install python
 - pip install amino
-- git clone https://github.com/deluvsushi/13MINX9DVB0
+- git clone https://github.com/zeviel/13MINX9DVB0
 - cd 13MINX9DVB0
 - python 13MINX9DVB0.py
 ```
